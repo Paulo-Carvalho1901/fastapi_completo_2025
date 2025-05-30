@@ -1,0 +1,1 @@
+# fastapi_completo_2025
