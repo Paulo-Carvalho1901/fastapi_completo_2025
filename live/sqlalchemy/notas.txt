@@ -23,3 +23,8 @@ forma de montar varios selects, usando codigo Python
 
 ORM - Object Relation Mapper 
 mapeamento de banco de dados
+
+Pool
+Uma instrução relativamente cara de IO é criação de conexão com o
+banco de dados. Por esse motivo, o sqlalchemy armazena as conexões
+em um reservatório de conexões chamados de Pool
