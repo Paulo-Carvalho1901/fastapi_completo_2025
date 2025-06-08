@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, text
 import psycopg2  # Importe explicitamente o psycopg2
 
 engine = create_engine(
@@ -6,17 +6,11 @@ engine = create_engine(
     # 'sqlite://'
     echo=True,
 )
-print(engine.pool)
 
-conn1 = engine.connect()
-conn2 = engine.connect()
-conn1.close()
-conn2.close()
-conn3 = engine.connect()
+con = engine.connect()
 
-print(engine.pool.status())
+sql = text('select * from usuarios')
 
+con.execute(sql)
 
-# print(conn.connection.dbapi_connection)
-
-# conn.close()
+con.close()
