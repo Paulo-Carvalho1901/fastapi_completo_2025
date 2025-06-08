@@ -1,0 +1,25 @@
+Entendimento geral
+
+DBAPI
+PEP do Python que padroniza como todos
+os drives do Python como devem funciona
+
+CORE
+Connection Pooling
+reservatório de Connection 
+
+Dialetos
+saber com qual banco estará lidando
+postgres, mysql, mariaDB
+
+Engine
+Gerenacia Connection do bancos
+
+Schemas/Types
+definindo as gerencia o metadado de uma tabela
+
+SQL Expression Language
+forma de montar varios selects, usando codigo Python
+
+ORM - Object Relation Mapper 
+mapeamento de banco de dados
