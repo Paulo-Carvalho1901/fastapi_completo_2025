@@ -17,6 +17,8 @@ Gerenacia Connection do bancos
 
 Schemas/Types
 definindo as gerencia o metadado de uma tabela
+os metadados das tabelas podem ser descritos por Schemas
+e seus determinados tipos
 
 SQL Expression Language
 forma de montar varios selects, usando codigo Python
