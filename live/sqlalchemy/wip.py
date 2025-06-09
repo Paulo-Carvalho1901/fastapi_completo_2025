@@ -9,13 +9,9 @@ engine = create_engine(
 )
 
 # CRIADO A VARIAVEL DE CONEXÃO CON
-con = engine.connect()
-
-# COMANDO SQL 
-sql = text('select * from usuarios')
-
-# EXECUTANDO O COMANDO SQL NO BANCO CONECTADO
-con.execute(sql)
-
-# FECHANDO A CONEXÃO
-con.close()
+with engine.connect() as con:
+    with con.begin():
+    # COMANDO SQL 
+        sql = text('select * from usuarios')
+        # EXECUTANDO O COMANDO SQL NO BANCO CONECTADO
+        result = con.execute(sql)
