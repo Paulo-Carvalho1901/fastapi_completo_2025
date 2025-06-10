@@ -14,6 +14,14 @@ postgres, mysql, mariaDB
 
 Engine
 Gerenacia Connection do bancos
+A 'Engine' do sqlalchemy é o ponto de contato com banco de dados, estabelecendo e 
+gerenciando as conexões. Ela é instanciada através de função create_engine(), que recebe as
+credenciais do banco de dados, o endereço de conexão (URI) e configura o pool de conexões
+
+Session
+Quando a persistência de dados e consultas ao banco de dados utilizando o ORM, s Session é a 
+principal interface. Ela atua como um intermediario entre o aplicativo Python e o banco de dados,
+medida pela Engine. A Session é encarregada de todos as trasnsações, fornecendo uma API para conduzi-las
 
 Schemas/Types
 definindo as gerencia o metadado de uma tabela
@@ -45,3 +53,5 @@ usar métodos e atributos, Python para manipular seus registro de banco de dados
 ORM significa Mapoeamento objeto-relacional. É uma tecnica de programaçao que vincula
 (ou mapeia) objetos a registros de banco de dados. Em outras palavras, um ORM permite que você
 interaja com seu banco de dados, como se você estivesse trabalhando com objeto Python
+
+
