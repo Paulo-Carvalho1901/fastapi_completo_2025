@@ -36,3 +36,12 @@ ACID
 A: atomico / atomicidade
 Transação do banco
 ou a transação é confirmada commitada ou não acontece e volta ao estado anterior do objeto
+
+sqlalchemy
+O sqlalchemy é um ORM. Ele permite que você trabalhe com banco de dados SQL 
+de meneira mais natural aos programadores Python. Em vez de escrever consultas SQL cruas, você podem
+usar métodos e atributos, Python para manipular seus registro de banco de dados
+
+ORM significa Mapoeamento objeto-relacional. É uma tecnica de programaçao que vincula
+(ou mapeia) objetos a registros de banco de dados. Em outras palavras, um ORM permite que você
+interaja com seu banco de dados, como se você estivesse trabalhando com objeto Python
