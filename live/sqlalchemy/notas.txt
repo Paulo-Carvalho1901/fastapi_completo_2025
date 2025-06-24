@@ -23,6 +23,15 @@ Quando a persistência de dados e consultas ao banco de dados utilizando o ORM, 
 principal interface. Ela atua como um intermediario entre o aplicativo Python e o banco de dados,
 medida pela Engine. A Session é encarregada de todos as trasnsações, fornecendo uma API para conduzi-las
 
+Padrões da sessão
+1. Respositório: A sessão atua como um Respositório. A ideia de um Respositório é abstrair
+qualquer interação envolvendo persistência de dados
+2. Unidade de trabalho: Quando a sessão é aberta, todos os dados inseridos, modificados
+ou deletados não são feitos de imediato no banco de dados. Fazendo todas as 
+modificações que queremos e executamos uma única ação
+3. Mapoeamento de Idendidade: É criado um cache para as entidades que já estão carregadas
+na sessão para evitar conexões desnecessárias. 
+
 Schemas/Types
 definindo as gerencia o metadado de uma tabela
 os metadados das tabelas podem ser descritos por Schemas
