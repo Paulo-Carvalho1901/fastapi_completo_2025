@@ -1,14 +1,15 @@
+from contextlib import contextmanager
+from datetime import datetime
+
 import pytest
 from fastapi.testclient import TestClient
-
-from sqlalchemy import create_engine
+from sqlalchemy import create_engine, event
 from sqlalchemy.orm import Session
-from models import table_registry
 from sqlalchemy.pool import StaticPool
 
 from database import get_session
-
 from main import app
+from models import User, table_registry
 
 
 # Bloco de teste reutilizavel (DRY)
@@ -55,3 +56,12 @@ def _mock_db_time(model, time=datetime(2025, 5, 20)):
 @pytest.fixture
 def mock_db_time():
     return _mock_db_time
+
+@pytest.fixture
+def user(session: Session):
+    user = User(username='Teste', email='teste@teste.com', password='testtest')
+    session.add(user)
+    session.commit()
+    session.refresh(user)
+
+    return user
