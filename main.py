@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 from models import User
 from database import get_session
 
-from security import get_password_hash, verify_password, create_acess_token
+from security import get_password_hash, verify_password, create_acess_token, get_current_user
 
 
 app = FastAPI(title='Curso de FastAPI')
@@ -52,7 +52,10 @@ def create_user(user: UserSchema, session = Depends(get_session)): # function an
 def read_users(
     limit: int = 10,
     offset: int = 0,
-    session: Session = Depends(get_session)):
+    session: Session = Depends(get_session),
+    current_user=Depends(get_current_user),
+    ):
+
     users = session.scalars(select(User).limit(limit).offset(offset))
     return {'users': users}
 

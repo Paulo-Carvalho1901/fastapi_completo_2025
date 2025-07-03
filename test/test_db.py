@@ -31,18 +31,13 @@ def test_creat_user(session, mock_db_time):
     }
 
 
-def test_read_usuers(client):
-    response = client.get('/users/')
-
-    assert response.status_code == HTTPStatus.OK
-    assert response.json() == {
-        'users': []
-    }
-
-def test_read_usuers_with_users(client, user):
+def test_read_users(client, user, token):
 
     user_schema = UserPublic.model_validate(user).model_dump()
-    response = client.get('/users/')
+    response = client.get(
+        '/users/',
+        headers={'Authorization': f'Bearer {token}'}
+    )
 
     assert response.status_code == HTTPStatus.OK
     assert response.json() == {
