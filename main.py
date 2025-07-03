@@ -5,6 +5,7 @@ from schema import Message, UserList, UserPublic, UserSchema, Token
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
+from http import HTTPStatus
 
 from models import User
 from database import get_session
@@ -99,20 +100,16 @@ def update_user(
         )
 
 # DELETE
-@app.delete(
-    '/users/{user_id}', status_code=status.HTTP_200_OK,
-    response_model=Message)
-
+@app.delete('/users/{user_id}', response_model=Message)
 def delete_user(
-    user_id: int, 
+    user_id: int,
     session: Session = Depends(get_session),
     current_user: User = Depends(get_current_user),
-    ):
-
+):
     if current_user.id != user_id:
         raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail='Not enough permissions'
+            status_code=HTTPStatus.FORBIDDEN,
+            detail='Not enough permissions',
         )
 
     session.delete(current_user)

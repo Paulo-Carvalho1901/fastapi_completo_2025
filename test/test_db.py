@@ -37,7 +37,7 @@ def test_read_users(client, user, token):
     user_schema = UserPublic.model_validate(user).model_dump()
     response = client.get(
         '/users/',
-        headers={'Authorization': f'Bearer {token}'}
+        headers={'Authorization': f'Bearer {token}'},
     )
 
     assert response.status_code == HTTPStatus.OK
@@ -68,8 +68,7 @@ def test_delete_user(client, user, token):
     response = client.delete(
         f'/users/{user.id}',
         headers={'Authorization': f'Bearer {token}'},
-        )
-
+    )
     assert response.status_code == HTTPStatus.OK
     assert response.json() == {'message': 'User deleted'}
 

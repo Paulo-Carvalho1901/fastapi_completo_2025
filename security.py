@@ -49,7 +49,7 @@ def get_current_user(
     
     credencial_execuption = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail='could not validate credentials',
+        detail='Could not validate credentials',
         headers={'WWW-Authenticate': 'Bearer'},
     )
 
