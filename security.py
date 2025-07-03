@@ -8,8 +8,9 @@ from database import get_session
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 
-from sqlalchemy.orm import Session
-
+from sqlalchemy import select
+from sqlalchemy.orm import Session 
+from models import User
 
 SECRET_KEY = 'your-secret-key'
 ALGORITHM = 'HS256'
@@ -59,3 +60,12 @@ def get_current_user(
             raise credencial_execuption
     except DecodeError:
         raise credencial_execuption
+
+    user = session.scalar(
+        select(User).where(User.email == subject_email)
+    )
+
+    if not user:
+        raise credencial_execuption
+    
+    return user
