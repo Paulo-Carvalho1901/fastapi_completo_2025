@@ -1,7 +1,7 @@
 from fastapi import Depends, FastAPI, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 
-from schema import Message, UserList, UserPublic, UserSchema
+from schema import Message, UserList, UserPublic, UserSchema, Token
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
@@ -9,7 +9,7 @@ from sqlalchemy.exc import IntegrityError
 from models import User
 from database import get_session
 
-from security import get_password_hash, verify_password
+from security import get_password_hash, verify_password, create_acess_token
 
 
 app = FastAPI(title='Curso de FastAPI')
@@ -111,7 +111,7 @@ def delete_user(user_id: int, session: Session = Depends(get_session)):
     return {'message': 'User deleted'}
 
 
-@app.post('/token')
+@app.post('/token', response_model=Token)
 def login_for_acess_token(
     form_data: OAuth2PasswordRequestForm = Depends(),
     session: Session = Depends(get_session),
@@ -132,6 +132,10 @@ def login_for_acess_token(
             detail='incorrect email or password'
         )
     
+    access_token = create_acess_token(
+        {'sub': user.email}
+    )
+    return {'access_token': access_token, 'token_type': 'Bearer'}
 
 
 if __name__ == '__main__':

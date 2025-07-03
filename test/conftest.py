@@ -10,6 +10,7 @@ from sqlalchemy.pool import StaticPool
 from database import get_session
 from main import app
 from models import User, table_registry
+from security import get_password_hash
 
 
 # Bloco de teste reutilizavel (DRY)
@@ -59,9 +60,18 @@ def mock_db_time():
 
 @pytest.fixture
 def user(session: Session):
-    user = User(username='Teste', email='teste@teste.com', password='testtest')
+    password = 'testtest'
+    
+    user = User(
+        username='Teste', 
+        email='teste@teste.com', 
+        password=get_password_hash(password)
+    )
+    
     session.add(user)
     session.commit()
     session.refresh(user)
+
+    user.clean_password = password
 
     return user
