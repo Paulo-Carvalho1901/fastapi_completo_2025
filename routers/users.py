@@ -55,7 +55,12 @@ def read_users(
 
 
 # Criar um GET para users por id
-
+@router.get('/{user_id}', response_model=UserPublic)
+def read_user(user_id: int, session: Session = Depends(get_session)):
+    user = session.get(User, user_id)
+    if not user:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail='User not found')
+    return user
 
 
 # PUT ATUALIZAR DADOS
